@@ -24,6 +24,9 @@
             oppure possono essere combinati fra loro (es. numeri e simboli,
             oppure tutti e tre insieme). Dare all’utente anche la possibilità di permettere o meno la ripetizione di caratteri uguali.
     */
+
+    include_once __DIR__ . "/utilities/functions.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +38,30 @@
         <title>Password Generator</title>
     </head>
     <body>
-        
+        <form action="./" method="get">
+            <input type="number" name="pwd-length" id="pwd-length" min="1" max="30" step="1" value="12">
+            <input type="checkbox" name="numbers" id="numbers" checked />
+            <input type="checkbox" name="up-letters" id="up-letters" checked />
+            <input type="checkbox" name="low-letters" id="low-letters" checked />
+            <input type="checkbox" name="spec-chars" id="spec-chars" checked />
+            <button type="submit">
+                PW Request
+            </button>
+        </form>
+
+        <?php
+            $pwd_length = $_GET["pwd-length"];
+            $are_there_numbers = isset($_GET["numbers"]);
+            $are_there_up_letters = isset($_GET["up-letters"]);
+            $are_there_low_letters = isset($_GET["low-letters"]);
+            $are_there_spec_chars = isset($_GET["spec-chars"]);
+        ?>
+
+        <div class="my_response">
+            <?php
+                $pw = genPwd ($pwd_length, $are_there_numbers, $are_there_up_letters, $are_there_low_letters, $are_there_spec_chars);
+                echo $pw;
+            ?>
+        </div>
     </body>
 </html>
