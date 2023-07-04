@@ -35,20 +35,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./style.css">
         <title>Password Generator</title>
     </head>
     <body>
-        <form action="./" method="get">
-            <input type="number" name="pwd-length" id="pwd-length" min="1" max="30" step="1" value="12">
-            <input type="checkbox" name="numbers" id="numbers" checked />
-            <input type="checkbox" name="up-letters" id="up-letters" checked />
-            <input type="checkbox" name="low-letters" id="low-letters" checked />
-            <input type="checkbox" name="spec-chars" id="spec-chars" checked />
-            <button type="submit">
-                PW Request
-            </button>
-        </form>
-
         <?php
             $pwd_length = $_GET["pwd-length"];
             $are_there_numbers = isset($_GET["numbers"]);
@@ -56,12 +46,53 @@
             $are_there_low_letters = isset($_GET["low-letters"]);
             $are_there_spec_chars = isset($_GET["spec-chars"]);
         ?>
-
-        <div class="my_response">
-            <?php
-                $pw = genPwd ($pwd_length, $are_there_numbers, $are_there_up_letters, $are_there_low_letters, $are_there_spec_chars);
-                echo $pw;
-            ?>
+        <div class="container py-5">
+            <form action="./" method="get" class="d-flex justify-content-between align-items-center my_form">
+                <div class="d-flex align-items-center my_check">
+                    <label for="numbers" class="me-3">
+                        Lunghezza Password
+                    </label>
+                    <input type="number" name="pwd-length" class="form-control" id="pwd-length" min="1" max="30" step="1" value="12">
+                </div>
+                
+                <div class="my_check">
+                    <label for="numbers">
+                        1 2 3
+                    </label>
+                    <input type="checkbox" name="numbers" id="numbers" checked />
+                </div>
+    
+                <div class="my_check">
+                    <label for="up-letters">
+                        A B C
+                    </label>
+                    <input type="checkbox" name="up-letters" id="up-letters" checked />
+                </div>
+    
+                <div class="my_check">
+                    <label for="low-letters">
+                        a b c
+                    </label>
+                    <input type="checkbox" name="low-letters" id="low-letters" checked />
+                </div>
+    
+                <div class="my_check">
+                    <label for="spec-chars">
+                        ! @ #
+                    </label>
+                    <input type="checkbox" name="spec-chars" id="spec-chars" checked />
+                </div>
+    
+                <button type="submit">
+                    PW Request
+                </button>
+            </form>
+            <div class="d-flex justify-content-center pt-5 my_response">
+                <?php
+                    $pw = genPwd ($pwd_length, $are_there_numbers, $are_there_up_letters, $are_there_low_letters, $are_there_spec_chars);
+                    echo $pw;
+                ?>
+            </div>
         </div>
     </body>
 </html>
